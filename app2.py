@@ -17,7 +17,7 @@ def analyze_image(image_bytes):
         # Convert bytes to PIL Image
         image = Image.open(io.BytesIO(image_bytes))
         
-        # Generate content
+        # Generate content with streaming
         response = model.generate_content(
             [
                 "You are a geography expert. Analyze the image to guess the location and provide reasoning.",
@@ -25,9 +25,16 @@ def analyze_image(image_bytes):
             ],
             stream=True
         )
+        
+        # Resolve the response to accumulate text
+        response.resolve()
+        
+        # Return the final text output
         return response.text
+    
     except Exception as e:
         return f"Error: {str(e)}"
+
 
 
 # Streamlit UI
