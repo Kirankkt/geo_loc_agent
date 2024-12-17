@@ -7,20 +7,28 @@ import os
 os.environ["GOOGLE_API_KEY"] = "AIzaSyBy791VYFuQjFIkCTV_ELBkGKIsv17wH_M"  # Replace with your key
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-# Function to analyze image with Gemini API
+from PIL import Image
+import io
+
 def analyze_image(image_bytes):
     try:
         model = genai.GenerativeModel("gemini-1.5-flash")
+        
+        # Convert bytes to PIL Image
+        image = Image.open(io.BytesIO(image_bytes))
+        
+        # Generate content
         response = model.generate_content(
             [
-                "You are a geography expert. Analyze the image to guess the location and provide a detailed explanation.",
-                image_bytes
+                "You are a geography expert. Analyze the image to guess the location and provide reasoning.",
+                image
             ],
-            stream=True,
+            stream=True
         )
         return response.text
     except Exception as e:
         return f"Error: {str(e)}"
+
 
 # Streamlit UI
 st.title("Geography Identification AI 🌍")
