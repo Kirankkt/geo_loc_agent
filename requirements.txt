@@ -1,4 +1,5 @@
 streamlit
 pillow
 python-dotenv
-phi
+git+https://github.com/cgarciae/phi.git
+
