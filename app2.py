@@ -4,7 +4,7 @@ from PIL import Image
 import os
 
 # Configure Google Gemini API Key
-os.environ["GOOGLE_API_KEY"] = "YOUR_GEMINI_API_KEY"  # Replace with your key
+os.environ["GOOGLE_API_KEY"] = "AIzaSyBy791VYFuQjFIkCTV_ELBkGKIsv17wH_M"  # Replace with your key
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Function to analyze image with Gemini API
